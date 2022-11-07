@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+
 import { CreateTodoitemComponent } from './todo/create-todoitem/create-todoitem.component';
 import { ListTodoitemComponent } from './todo/list-todoitem/list-todoitem.component';
 import { TodoitemDetailComponent } from './todo/todoitem-detail/todoitem-detail.component';
@@ -26,7 +27,7 @@ export const routes: Routes = [
   {
     path: 'todos/edit/:id',
     component: UpdateTodoItemComponent
-  },
+  }
 ];
 
 @NgModule({

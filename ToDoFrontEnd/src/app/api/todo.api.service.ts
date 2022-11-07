@@ -17,6 +17,10 @@ export class TodoApiService {
   }
 
   update(todoItem: ToDoItem): Observable<void> {
-    return this.http.put<void>('https://635fc244ca0fe3c21aa3d012.mockapi.io/api/todos/9', todoItem);
+    return this.http.put<void>(`https://635fc244ca0fe3c21aa3d012.mockapi.io/api/todos/${todoItem.id}`, todoItem);
+  }
+
+  delete(id: number): Observable<void> {
+    return this.http.delete<void>(`https://635fc244ca0fe3c21aa3d012.mockapi.io/api/todos/${id}`);
   }
 }

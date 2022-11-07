@@ -76,18 +76,18 @@ describe('TodoService', () => {
     httpClientSpy.post.and.returnValue(of({}));
     httpClientSpy.delete.and.returnValue(of({}));
     // when
-    service.delete(todoItem);
+    service.delete(todoItem.id);
     // then
-    expect(httpClientSpy.delete).toHaveBeenCalledWith('https://635fc244ca0fe3c21aa3d012.mockapi.io/api/todos/9', todoItem);
+    expect(httpClientSpy.delete).toHaveBeenCalledWith('https://635fc244ca0fe3c21aa3d012.mockapi.io/api/todos/9');
   })
 
-  it('should respond error when create fails', () => {
+  it('should respond error when delete fails', () => {
     // given
-    const todoItem = new ToDoItem(9, 'title', 'description', true);
+    const todoItem = new ToDoItem(1, 'title', 'description', true);
     httpClientSpy.post.and.returnValue(of({}));
     httpClientSpy.delete.and.returnValue(throwError(() => ({errorMessage: 'delete failed'})));
     // when
-    service.delete(todoItem);
+    service.delete(todoItem.id);
     // then
     expect(service.errorMessage).toEqual('delete failed');
   })

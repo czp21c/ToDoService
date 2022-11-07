@@ -69,4 +69,26 @@ describe('TodoService', () => {
     // then
     expect(service.errorMessage).toEqual('update failed');
   })
+
+  it('should delete todoItem via mockHttp delete', () => {
+    // given
+    const todoItem = new ToDoItem(9, 'title', 'description', true);
+    httpClientSpy.post.and.returnValue(of({}));
+    httpClientSpy.delete.and.returnValue(of({}));
+    // when
+    service.delete(todoItem);
+    // then
+    expect(httpClientSpy.delete).toHaveBeenCalledWith('https://635fc244ca0fe3c21aa3d012.mockapi.io/api/todos/9', todoItem);
+  })
+
+  it('should respond error when create fails', () => {
+    // given
+    const todoItem = new ToDoItem(9, 'title', 'description', true);
+    httpClientSpy.post.and.returnValue(of({}));
+    httpClientSpy.delete.and.returnValue(throwError(() => ({errorMessage: 'delete failed'})));
+    // when
+    service.delete(todoItem);
+    // then
+    expect(service.errorMessage).toEqual('delete failed');
+  })
 });
